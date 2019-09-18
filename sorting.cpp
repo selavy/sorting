@@ -4,8 +4,11 @@
 #include <algorithm>
 #include <cassert>
 
-template <class It, class Cmp>
-void unguarded_insertion_sort(It begin, It end, Cmp cmp) noexcept {
+template <
+    class It,
+    class Cmp = std::less<>
+>
+void unguarded_insertion_sort(It begin, It end, Cmp cmp = Cmp{}) noexcept {
     // pre : *(begin - 1) <= all elements in [begin, end)
     // post: [begin - 1, end) sorted
     for (; begin != end; ++begin) {
@@ -37,7 +40,7 @@ int main(int argc, char** argv)
     assert(!std::is_sorted(vs.begin(), vs.end()));
 
     std::make_heap(vs.begin(), vs.end(), std::greater<>{});
-    unguarded_insertion_sort(vs.begin() + 2, vs.end(), std::less<>{});
+    unguarded_insertion_sort(vs.begin() + 2, vs.end());
     assert(std::is_sorted(vs.begin(), vs.end()));
 
     return 0;
