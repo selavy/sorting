@@ -8,7 +8,7 @@ template <class It, class Cmp>
 void unguarded_insertion_sort(It begin, It end, Cmp cmp) noexcept {
     // pre : *(begin - 1) <= all elements in [begin, end)
     // post: [begin - 1, end) sorted
-    for (; begin < end; ++begin) {
+    for (; begin != end; ++begin) {
         It cur = begin, prev = begin - 1;
         while (cmp(*cur, *prev)) {
             std::iter_swap(cur--, prev--);
